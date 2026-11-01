@@ -7,8 +7,11 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import router from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
+import authRoutes from './routes/authRoutes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
+app.use(cookieParser());
 
 const PORT = process.env.PORT ?? 3000;
 
@@ -20,7 +23,7 @@ app.use(cors());
 await connectMongoDB();
 
 app.use(router);
-
+app.use(authRoutes);
 // 404 — якщо маршрут не знайдено
 app.use(notFoundHandler);
 
