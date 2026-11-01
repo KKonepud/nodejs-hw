@@ -6,6 +6,7 @@ import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import router from './routes/notesRoutes.js';
+import { errors } from 'celebrate';
 
 const app = express();
 
@@ -22,6 +23,9 @@ app.use(router);
 
 // 404 — якщо маршрут не знайдено
 app.use(notFoundHandler);
+
+// Обробка помилок валідації celebrate
+app.use(errors());
 
 // Error — якщо під час запиту виникла помилка
 app.use(errorHandler);
