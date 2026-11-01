@@ -22,7 +22,6 @@ export const getAllNotes = async (req, res) => {
     });
   }
 
-
   const [notes, totalNotes] = await Promise.all([
     notesQuery.clone().skip(skip).limit(perPage),
     Note.countDocuments(notesQuery.getFilter()),
@@ -46,7 +45,7 @@ export const getNoteById = async (req, res) => {
   if (!note) {
     throw createHttpError(404, `Note not found`);
   }
-  res.status(200).json({ note });
+  res.status(200).json(note);
 };
 
 export const createNote = async (req, res) => {

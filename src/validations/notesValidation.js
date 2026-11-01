@@ -3,13 +3,15 @@ import { isValidObjectId } from 'mongoose';
 import { TAGS } from '../constants/tags.js';
 
 const noteIdValidation = Joi.object({
-  noteId: Joi.string().custom((value, helpers) => {
-    if (!isValidObjectId(value)) {
-      return helpers.error('any.invalid');
-    }
+  noteId: Joi.string()
+    .custom((value, helpers) => {
+      if (!isValidObjectId(value)) {
+        return helpers.error('any.invalid');
+      }
 
-    return value;
-  }),
+      return value;
+    })
+    .required(),
 });
 
 export const getAllNotesSchema = {
