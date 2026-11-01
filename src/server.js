@@ -9,6 +9,7 @@ import router from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
 import authRoutes from './routes/authRoutes.js';
 import cookieParser from 'cookie-parser';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 app.use(cookieParser());
@@ -24,6 +25,7 @@ await connectMongoDB();
 
 app.use(router);
 app.use(authRoutes);
+app.use(userRoutes);
 // 404 — якщо маршрут не знайдено
 app.use(notFoundHandler);
 
